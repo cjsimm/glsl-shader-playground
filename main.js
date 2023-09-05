@@ -20,6 +20,10 @@ function loadShaderFile(shaderFilePath) {
         }
         return response.text();
     })
+    .catch((error) => {
+        console.log(error);
+        return null;
+    })
     ) : null;
 }
 
