@@ -1,14 +1,31 @@
 import * as THREE from "three";
 
+//initialize renderer, camera, scene
+const canvas = document.getElementById('c');
+
+
 //object passed to loadShader that details shader file locations
 //any uniforms declared in the shader files must be passed in via the
-//uniforms object  
+//uniforms object
+const path = '/shaders/youtube-shader-tutorial/'  
 const shaders = {
     vertexFile: null,
-    fragmentFile: '/shaders/hello-world/hello-world.frag',
-    uniforms: {},
+    vertexFile: path + 'vertex.vert',
+    fragmentFile: path + 'fragment.frag',
+    uniforms: {
+        resolution: { value: new THREE.Vector2(canvas.width, canvas.height) }
+    },
 }
 
+//geometry creation function
+
+    
+let geometry;
+//default geometry if no external js setup file exists
+if (!geometry) {
+    console.log('setup file failed to load. Using default plane geometry.');
+    geometry = new THREE.PlaneGeometry(2,2); 
+}
 //function that returns a promise to load a shader file or null if the
 //shaderfile path is empty
 function loadShaderFile(shaderFilePath) {
@@ -52,8 +69,7 @@ console.log("initialized shader material \n ------ \n", material);
 
 
 
-//initialize renderer, camera, scene
-const canvas = document.getElementById('c');
+
 const renderer = new THREE.WebGLRenderer({canvas,antialias: true});
 /* renderer.setSize(window.innerWidth, window.innerHeight); */
 const camera = new THREE.OrthographicCamera();
@@ -62,7 +78,7 @@ const scene = new THREE.Scene();
 renderer.a
 
 //create plane mesh and cover screen, attach shader as material, add to scene 
-const geometry = new THREE.PlaneGeometry(2,2);
+/* const geometry = new THREE.BufferGeometry(); */
 //filler material for debugging (doesnt need light)
 /* const tempMaterial = new THREE.MeshBasicMaterial({color: 'red'}); */
 
