@@ -4,10 +4,6 @@ body {
 }
 #c {
     box-sizing: border-box;
-    width: 100vw;
-    height: 100vh;
-    max-width: 800px;
-    max-height: 800px;
     display: block;
     margin: auto;
     border: solid 1px black;

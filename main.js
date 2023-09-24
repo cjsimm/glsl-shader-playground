@@ -13,9 +13,13 @@ const shaders = {
     vertexFile: path + 'vertex.vert',
     fragmentFile: path + 'fragment.frag',
     uniforms: {
-        resolution: { value: new THREE.Vector2(canvas.width, canvas.height) }
+        resolution: { value: new THREE.Vector2(canvas.width, canvas.height) },
+        time: { value: 1.0}
     },
 }
+
+console.log('canvas inner width', canvas.innerWidth);
+console.log('canvas inner height', canvas.innerHeight);
 
 //geometry creation function
 
@@ -70,7 +74,8 @@ console.log("initialized shader material \n ------ \n", material);
 
 
 
-const renderer = new THREE.WebGLRenderer({canvas,antialias: true});
+const renderer = new THREE.WebGLRenderer({canvas,antialias: false});
+/* renderer.setPixelRatio(window.devicePixelRatio); */
 /* renderer.setSize(window.innerWidth, window.innerHeight); */
 const camera = new THREE.OrthographicCamera();
 camera.position.z = 1;
@@ -93,6 +98,10 @@ console.log("scene object before animation loop begins \n------\n", scene);
 
 //run animation loop 
 const animate = () => {
+    //update time uniform on every render
+    material.uniforms.time.value = performance.now()/1000;
+/*     console.log(scene.children[0].material.uniforms.time); */
+    //render scene 
     renderer.render(scene, camera);
 }
 
