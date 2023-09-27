@@ -7,10 +7,10 @@ const canvas = document.getElementById('c');
 //object passed to loadShader that details shader file locations
 //any uniforms declared in the shader files must be passed in via the
 //uniforms object
-const path = '/shaders/youtube-shader-tutorial/'  
+const path = '/shaders/neon-sine/'  
 const shaders = {
     vertexFile: null,
-    vertexFile: path + 'vertex.vert',
+    vertexFile: null,
     fragmentFile: path + 'fragment.frag',
     uniforms: {
         resolution: { value: new THREE.Vector2(canvas.width, canvas.height) },
