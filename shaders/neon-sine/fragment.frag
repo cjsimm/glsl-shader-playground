@@ -23,19 +23,21 @@ void main() {
     //calculate the y position of the sine wave. introduce scaled time to cause 
     // variation between render cycles and cause the wave to be animated
     float r = amp * sin(uv.y * wavelength - time * tScale); //r
-    float g = .5 * sin(uv.y / 0.005 - time * 1.2); //r
+    float y = amp * sin(uv.y * wavelength + time * tScale); //r
+    float g = .3 * sin(uv.y / 0.005 - time * 1.); //r
 
     
-    //scalar value that controls color intensity based on horizontal position
+    // derive value that controls color intensity based on horizontal position
     //using the absolute value gives us an even interpolaton of colour on each
     //side of the sine wave 
-    float e = 0.05 / abs(uv.x + r);
-    float f = 0.005 / abs(uv.x + g);
+    float a = 0.05 / abs(uv.x + r);
+    float b = 0.005 / abs(uv.x + g);
+    float c = 0.05 / abs(uv.x + y);
     
     //scale our color value with our determined x and y position for the sine wave
     //dividing by a value will make our sine wave position values closer to 1. (bright wae)
     //multiplying will make sine wave position values closer to 0 (darker wave)
-    vec3 col = gCol * f + rCol * e;
+    vec3 col = gCol * b + rCol * a + yCol * c;
     gl_FragColor = vec4(col, 1.0);
 
 }
